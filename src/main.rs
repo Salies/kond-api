@@ -3,6 +3,7 @@ mod model;
 mod service;
 
 use actix_web::{get, post, web, App, HttpResponse, HttpServer, Responder};
+use log::info;
 use model::SteamPlayers;
 use r2d2::Pool;
 use r2d2_sqlite::SqliteConnectionManager;
@@ -83,6 +84,8 @@ async fn index() -> impl Responder {
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     //dotenv().ok(); // uncomment this line to use .env file
+
+    info!("Starting server...");
 
     let db_url = "data.db";
     let manager = db::init_db(db_url);
