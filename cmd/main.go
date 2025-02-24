@@ -26,7 +26,7 @@ func main() {
 
 	// setup CORS
 	r.Use(cors.New(cors.Config{
-		AllowOrigins: []string{"https://salies.github.io/kond"}, // Change to your frontend domain
+		AllowOrigins: []string{"https://salies.github.io"}, // Change to your frontend domain
 		AllowMethods: []string{
 			"GET",
 			"POST",
