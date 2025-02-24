@@ -28,6 +28,7 @@ func main() {
 		})
 	})
 
+	// get players data from Steam
 	r.POST("/players", func(c *gin.Context) {
 		var playersData api.SteamPlayers
 		if err := c.ShouldBindJSON(&playersData); err != nil {
@@ -36,6 +37,49 @@ func main() {
 		}
 
 		data, err := api.GetPlayersFromSteam(&playersData)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+
+		c.JSON(http.StatusOK, data)
+	})
+
+	// upload match to kond
+	r.POST("/upload", func(c *gin.Context) {
+		var matchData api.MatchCreate
+		if err := c.ShouldBindJSON(&matchData); err != nil {
+			c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+			return
+		}
+
+		data, err := api.InsertMatch(&matchData)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+
+		c.JSON(http.StatusOK, data)
+	})
+
+	// get match data
+	r.GET("/match/:id", func(c *gin.Context) {
+		id := c.Param("id")
+
+		data, err := api.GetMatchById(id)
+		if err != nil {
+			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+			return
+		}
+
+		c.JSON(http.StatusOK, data)
+	})
+
+	// try to retrieve match id by file hash
+	r.GET("/demo/:hash", func(c *gin.Context) {
+		hash := c.Param("hash")
+
+		data, err := api.GetMatchIdFromFileHash(hash)
 		if err != nil {
 			c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
 			return
