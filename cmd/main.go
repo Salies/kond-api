@@ -2,10 +2,12 @@ package main
 
 import (
 	api "Salies/kond-api/internal/api"
+
 	//	"log"
 	"net/http"
 	"os"
 
+	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
 	//	"github.com/joho/godotenv"
 )
@@ -21,6 +23,20 @@ func main() {
 	api.InitDb()
 
 	r := gin.Default()
+
+	// setup CORS
+	r.Use(cors.New(cors.Config{
+		AllowOrigins: []string{"https://salies.github.io/kond"}, // Change to your frontend domain
+		AllowMethods: []string{
+			"GET",
+			"POST",
+			//"PUT",
+			//"DELETE",
+		},
+		//AllowHeaders:     []string{"Content-Type", "Authorization"},
+		//AllowCredentials: true,
+		//MaxAge:           12 * time.Hour,
+	}))
 
 	r.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
