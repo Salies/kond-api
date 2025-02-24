@@ -2,12 +2,12 @@ package main
 
 import (
 	api "Salies/kond-api/internal/api"
-//	"log"
+	//	"log"
 	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
-//	"github.com/joho/godotenv"
+	//	"github.com/joho/godotenv"
 )
 
 func main() {
@@ -63,7 +63,7 @@ func main() {
 	})
 
 	// get match data
-	r.GET("/match/:id", func(c *gin.Context) {
+	r.GET("/matches/:id", func(c *gin.Context) {
 		id := c.Param("id")
 
 		data, err := api.GetMatchById(id)

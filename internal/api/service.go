@@ -91,7 +91,7 @@ func InsertMatch(matchData *MatchCreate) (*MatchDataOut, error) {
 }
 
 func GetMatchById(id string) (*MatchData, error) {
-	query := `SELECT * FROM matches WHERE id = ?`
+	query := `SELECT * FROM match WHERE id = ?`
 	row := DB.QueryRow(query, id)
 
 	var matchData MatchData
@@ -109,7 +109,7 @@ func GetMatchById(id string) (*MatchData, error) {
 		return nil, err
 	}
 
-	query = `SELECT * FROM players WHERE match_id = ?`
+	query = `SELECT * FROM player_match WHERE match_id = ?`
 	rows, err := DB.Query(query, id)
 	if err != nil {
 		return nil, err
@@ -138,7 +138,7 @@ func GetMatchById(id string) (*MatchData, error) {
 }
 
 func GetMatchIdFromFileHash(fileHash string) (string, error) {
-	query := `SELECT id FROM matches WHERE hash = ?`
+	query := `SELECT id FROM match WHERE hash = ?`
 	row := DB.QueryRow(query, fileHash)
 
 	var id string
