@@ -137,15 +137,15 @@ func GetMatchById(id string) (*MatchData, error) {
 	return &matchData, nil
 }
 
-func GetMatchIdFromFileHash(fileHash string) (string, error) {
+func GetMatchIdFromFileHash(fileHash string) (*MatchDataOut, error) {
 	query := `SELECT id FROM match WHERE hash = ?`
 	row := DB.QueryRow(query, fileHash)
 
 	var id string
 	err := row.Scan(&id)
 	if err != nil {
-		return "", err
+		return nil, err
 	}
 
-	return id, nil
+	return &MatchDataOut{ID: id}, nil
 }
