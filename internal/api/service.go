@@ -43,7 +43,7 @@ func InsertMatch(matchData *MatchCreate) (*MatchDataOut, error) {
 	createdAt := time.Now().Format(time.RFC3339)
 	updatedAt := createdAt
 
-	query := `INSERT INTO matches (
+	query := `INSERT INTO match (
 		id, hash, map, team_a_name, team_b_name, team_a_score, team_b_score,
 		team_a_score_first_half, team_b_score_first_half, 
 		team_a_score_second_half, team_b_score_second_half,
@@ -68,7 +68,7 @@ func InsertMatch(matchData *MatchCreate) (*MatchDataOut, error) {
 
 	// now insert player data
 	for steamID, playerData := range matchData.PlayerData {
-		query := `INSERT INTO players (
+		query := `INSERT INTO player_match (
 			match_id, steam_id, player_name, final_team, kills, deaths, diff, kpr, dpr, adr,
 			pct_rounds_with_mk, opening_kills_per_round, win_pct_after_opening_kill, impact, kast, rating
 		) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`
