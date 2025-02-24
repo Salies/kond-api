@@ -26,16 +26,10 @@ func main() {
 
 	// setup CORS
 	r.Use(cors.New(cors.Config{
-		AllowOrigins: []string{"https://salies.github.io"}, // Change to your frontend domain
-		AllowMethods: []string{
-			"GET",
-			"POST",
-			//"PUT",
-			//"DELETE",
-		},
-		AllowHeaders: []string{"content-type", "application/json"},
-		//AllowCredentials: true,
-		//MaxAge:           12 * time.Hour,
+		AllowOrigins:     []string{"https://salies.github.io"},
+		AllowMethods:     []string{"GET", "POST", "OPTIONS"},
+		AllowHeaders:     []string{"Content-Type"},
+		AllowCredentials: true,
 	}))
 
 	r.GET("/", func(c *gin.Context) {
