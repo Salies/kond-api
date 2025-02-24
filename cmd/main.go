@@ -2,19 +2,19 @@ package main
 
 import (
 	api "Salies/kond-api/internal/api"
-	"log"
+//	"log"
 	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
-	"github.com/joho/godotenv"
+//	"github.com/joho/godotenv"
 )
 
 func main() {
-	err := godotenv.Load()
+	/*err := godotenv.Load()
 	if err != nil {
 		log.Fatal("Error loading .env file")
-	}
+	}*/
 
 	api.SteamApiKey = os.Getenv("STEAM_API_KEY")
 
