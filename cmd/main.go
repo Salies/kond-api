@@ -33,7 +33,7 @@ func main() {
 			//"PUT",
 			//"DELETE",
 		},
-		//AllowHeaders:     []string{"Content-Type", "Authorization"},
+		AllowHeaders: []string{"content-type", "application/json"},
 		//AllowCredentials: true,
 		//MaxAge:           12 * time.Hour,
 	}))
